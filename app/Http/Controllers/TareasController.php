@@ -35,12 +35,14 @@ class TareasController extends Controller
             'asignacion_id' => 'required|exists:asignaciones,id',
             'descripcion' => 'required|string|max:500',
             'nota'=>'required|numeric',
+            'fechaEntrega'=>'required',
         ]);
         $tarea=new Tareas();
         $tarea->asignacion_id = $request->asignacion_id;
         $tarea->descripcion=$request->descripcion;
         $tarea->nota = $request->nota;
-        $tarea->estado=false;
+        $tarea->fechaEntrega = $request->fechaEntrega;
+        $tarea->entrega=false;
         if ($tarea->save()) {
             return redirect('/tareas')->with('success', 'Registro agregado correctamente!');
         }else {
@@ -65,7 +67,7 @@ class TareasController extends Controller
         $tarea = Tareas::find($id);
         $asignacion = Asignaciones::where('estado', true)->get();
 
-        return view('posts.edit', compact('tarea', 'asignacion'));
+        return view('tareas.edit', compact('tarea', 'asignacion'));
     }
 
     /**
@@ -77,12 +79,14 @@ class TareasController extends Controller
             'asignacion_id' => 'required|exists:asignaciones,id',
             'descripcion' => 'required|string|max:500',
             'nota'=>'required|numeric',
+            'fechaEntrega'=>'required',
         ]);
         $tarea = Tareas::find($id);
         $tarea->asignacion_id = $request->asignacion_id;
         $tarea->descripcion=$request->descripcion;
         $tarea->nota = $request->nota;
-        $tarea->estado=false;
+        $tarea->fechaEntrega = $request->fechaEntrega;
+        $tarea->entrega=false;
         if ($tarea->save()) {
             return redirect('/tareas')->with('success', 'Registro agregado correctamente!');
         }else {
@@ -105,7 +109,7 @@ class TareasController extends Controller
     public function estado($id)
     {
         $tarea= Tareas::find($id);
-        $tarea->estado = !$tarea->estado;
+        $tarea->entrega = !$tarea->entrega;
         if($tarea->save()){
             return back()->with('success', 'Estado actualizado exitosamente');
         }else{

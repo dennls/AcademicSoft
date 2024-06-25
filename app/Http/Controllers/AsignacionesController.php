@@ -62,7 +62,7 @@ class AsignacionesController extends Controller
     public function show($id)
     {
         $asignacion = Asignaciones::with('usuario', 'curso')->find($id);
-        return view('asignacion.show', compact('asignacion'));
+        return view('asignaciones.show', compact('asignacion'));
     }
 
     /**
@@ -73,7 +73,7 @@ class AsignacionesController extends Controller
         $asignacion = Asignaciones::find($id);
         $curso = Curso::where('estado', true)->get();
 
-        return view('asignacion.edit', compact('asignacion', 'curso'));
+        return view('asignaciones.edit', compact('asignacion', 'curso'));
     }
 
     /**
@@ -84,7 +84,7 @@ class AsignacionesController extends Controller
         $this->validate($request, [
             'nombre' => 'required',
             'descripcion' => 'required|string|max:500',
-            'usuario_id' => 'required|exists:users,id',
+            //'usuario_id' => 'required|exists:users,id',
             'curso_id' => 'required|exists:cursos,id',
             'importe'=>'required|numeric',
             'fecha_inicio'=>'required',

@@ -5,7 +5,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ url('/asignaciones/registrar'.$asignacion->id) }}" method="post">
+                        <form action="{{ url('/asignaciones/actualizar/' . $asignacion->id) }}" method="post">
                             @method('put')
                             @csrf
                             <div class="row">
@@ -13,10 +13,8 @@
                                     <label for="curso_id">Curso </label>
                                     <select name="curso_id" id="" class="form-control">
                                         <option>Seleccione</option>
-                                        @foreach ($cursos as $item)
-                                            <option value="{{ $item->id }}"
-                                                @if (old('curso_id') == $item->id) selected @endif>{{ $item->nombre }}
-                                            </option>
+                                        @foreach ($curso as $item)
+                                            <option value="{{ $item->id }}" @if($item->id == $asignacion->curso_id) selected @endif>{{ $item->nombre }}</option>
                                         @endforeach
                                     </select>
                                     @error('curso_id')
@@ -25,7 +23,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="nombre">Asignatura</label>
-                                    <input type="text" name="nombre" class="form-control" value="{{ old('nombre') }}">
+                                    <input type="text" name="nombre" class="form-control" value="{{ $asignacion->nombre }}">
                                     @error('nombre')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -33,7 +31,7 @@
 
                                 <div class="form-group col-md-4">
                                     <label for="importe">Importe</label>
-                                    <input type="text" name="importe" class="form-control" value="{{ old('importe') }}">
+                                    <input type="text" name="importe" class="form-control" value="{{ $asignacion->importe }}">
                                     @error('importe')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -41,7 +39,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripción</label>
-                                <textarea type="text" name="descripcion" class="form-control">{{ old('descripcion') }}</textarea>
+                                <textarea type="text" name="descripcion" class="form-control">{{ $asignacion->descripcion }}</textarea>
                                 @error('descripcion')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
@@ -51,13 +49,13 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label for="fecha_inicio">Fecha Inicio</label>
-                                    <input type="datetime-local" name="fecha_inicio" value="{{ old('fecha_inicio') }}" class="form-control">
+                                    <input type="datetime-local" name="fecha_inicio" value="{{ $asignacion->fecha_inicio }}" class="form-control">
                                     @error('fecha_inicio') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
 
                                 <div class="col-md-4">
                                     <label for="horarioFinal">Fecha Finalizacion</label>
-                                    <input type="datetime-local" name="fecha_fin" value="{{ old('fecha_fin') }}" class="form-control">
+                                    <input type="datetime-local" name="fecha_fin" value="{{ $asignacion->fecha_fin }}" class="form-control">
                                     @error('fecha_fin')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror

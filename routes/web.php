@@ -44,6 +44,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
     Route::get('/asignaciones/actualizar/{id}', [App\Http\Controllers\AsignacionesController::class, 'edit']);
     Route::put('/asignaciones/actualizar/{id}', [App\Http\Controllers\AsignacionesController::class, 'update']);
     Route::get('/asignaciones/estado/{id}', [App\Http\Controllers\AsignacionesController::class, 'estado']);
+    Route::get('/asignaciones/ver/{id}', [App\Http\Controllers\AsignacionesController::class, 'show']);
+    Route::get('/asignaciones/eliminar/{id}', [App\Http\Controllers\AsignacionesController::class, 'destroy']);
 
     //tareas
     Route::get('/tareas', [TareasController::class, 'index']);

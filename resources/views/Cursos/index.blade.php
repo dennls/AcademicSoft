@@ -65,15 +65,13 @@
                                                 @if (Auth::user()->tipo == 'Administrador')
                                                     <td>
                                                         <a href="{{ url('/cursos/actualizar/' . $item->id) }}"
-                                                            class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                                            class="btn btn-info"><i class="fas fa-edit"></i></a>
                                                         @if ($item->estado == true)
                                                             <a href="{{ url('/cursos/estado/' . $item->id) }}"
                                                                 class="btn btn-warning"><i class="fas fa-ban"></i></a>
                                                         @else
                                                             <a href="{{ url('/cursos/estado/' . $item->id) }}"
                                                                 class="btn btn-success"><i class="fas fa-check"></i></a>
-                                                            <a href="{{ url('/cursos/eliminar/' . $item->id) }}"
-                                                                class="btn btn-danger"><i class="fas fa-trash"></i></a>
                                                         @endif
                                                     </td>
                                                 @else

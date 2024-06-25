@@ -15,6 +15,7 @@ class Tareas extends Model
         'descripcion',
         'nota',
         'entrega',
+        'fechaEntrega'
     ];
 
     public function asignacion()

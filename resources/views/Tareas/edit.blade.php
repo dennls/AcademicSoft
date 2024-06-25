@@ -5,16 +5,17 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ url('/tareas/registrar') }}" method="post">
+                        <form action="{{ url('/tareas/actualizar/' . $tarea->id ) }}" method="post">
+                            @method('put')
                             @csrf
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <label for="asignacion_id">Asignacion </label>
                                     <select name="asignacion_id" id="" class="form-control">
                                         <option>Seleccione</option>
-                                        @foreach ($asignaciones as $item)
+                                        @foreach ($asignacion as $item)
                                             <option value="{{ $item->id }}"
-                                                @if (old('asignacion_id') == $item->id) selected @endif>{{ $item->nombre }}
+                                                @if ($item->id == $tarea->asignacion_id) selected @endif>{{ $item->nombre }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -24,19 +25,19 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="nota">Nota</label>
-                                    <input type="text" name="nota" class="form-control" value="{{ old('nota') }}">
+                                    <input type="text" name="nota" class="form-control" value="{{ $tarea->nota }}">
                                     @error('nota')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="fechaEntrega">Fecha Entrega</label>
-                                    <input type="datetime-local" name="fechaEntrega" value="{{ old('fechaEntrega') }}" class="form-control">
+                                    <input type="datetime-local" name="fechaEntrega" value="{{ $tarea->fechaEntrega }}" class="form-control">
                                     @error('fecha_entrega') <small class="text-danger">{{ $message }}</small> @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="descripcion">Descripción</label>
-                                    <textarea type="text" name="descripcion" class="form-control">{{ old('descripcion') }}</textarea>
+                                    <textarea type="text" name="descripcion" class="form-control">{{ $tarea->descripcion }}</textarea>
                                     @error('descripcion')
                                         <small class="text-danger">{{ $message }}</small>
                                     @enderror
