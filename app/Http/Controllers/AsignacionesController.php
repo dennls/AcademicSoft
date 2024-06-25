@@ -34,7 +34,7 @@ class AsignacionesController extends Controller
         $request->validate([
             'nombre' => 'required',
             'descripcion' => 'required|string|max:500',
-            'usuario_id' => 'required|exists:users,id',
+            //'usuario_id' => 'required|exists:users,id',
             'curso_id' => 'required|exists:cursos,id',
             'importe'=>'required|numeric',
             'fecha_inicio'=>'required',

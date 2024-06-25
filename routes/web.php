@@ -4,6 +4,7 @@ use App\Http\Controllers\AsignacionesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CursoController;
+use App\Http\Controllers\TareasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,3 +44,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
     Route::get('/asignaciones/actualizar/{id}', [App\Http\Controllers\AsignacionesController::class, 'edit']);
     Route::put('/asignaciones/actualizar/{id}', [App\Http\Controllers\AsignacionesController::class, 'update']);
     Route::get('/asignaciones/estado/{id}', [App\Http\Controllers\AsignacionesController::class, 'estado']);
+
+    //tareas
+    Route::get('/tareas', [TareasController::class, 'index']);
+    Route::get('/tareas/registrar', [App\Http\Controllers\TareasController::class, 'create']);
+    Route::post('/tareas/registrar', [App\Http\Controllers\TareasController::class, 'store']);
+    Route::get('/tareas/actualizar/{id}', [App\Http\Controllers\TareasController::class, 'edit']);
+    Route::put('/tareas/actualizar/{id}', [App\Http\Controllers\TareasController::class, 'update']);
+    Route::get('/tareas/estado/{id}', [App\Http\Controllers\TareasController::class, 'estado']);
+    Route::get('/tareas/eliminar/{id}', [App\Http\Controllers\TareasController::class, 'destroy']);

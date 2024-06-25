@@ -5,7 +5,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ url('/cursos/actualizar/'.$curso->id) }}" method="post">
+                        <form action="{{ url('/cursos/actualizar/'.$curso->id) }}" method="post" enctype="multipart/form-data">
                             @method('put')
                             @csrf
                             <div class="form-group mb-5">
@@ -18,6 +18,7 @@
                             <div class="form-group mb-5">
                                 <label for="imagen">Imagen</label>
                                 <input type="file" name="imagen" value="{{ $curso->imagen }}" class="form-control">
+                                @error('imagen') <small class="text-danger">{{ $message }}</small> @enderror
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripcion</label>

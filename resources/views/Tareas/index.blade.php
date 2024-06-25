@@ -26,7 +26,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 text-end">
-                        <a href="{{ url('/asignaciones/registrar') }}" class="btn btn-dark text-end btn-sm">Nueva asignacion</a>
+                        <a href="{{ url('/tareas/registrar') }}" class="btn btn-dark text-end btn-sm">Nueva tarea</a>
                     </div>
                 </div>
 
@@ -35,56 +35,43 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>NOMBRE</th>
+                                <th>ASIGNATURA</th>
                                 <th>DESCRIPCION</th>
-                                <th>FECHA INICIO</th>
-                                <th>FECHA FIN</th>
-                                <th>USUARIO</th>
-                                <th>CURSO</th>
-                                <th>IMPORTE</th>
-                                <th>ESTADO</th>
+                                <th>NOTA</th>
+                                <th>ENTREGADO</th>
                                 <th>ACCIONES</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($asignaciones as $item)
+                            @foreach ($tareas as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->nombre }}</td>
+                                    <td>{{ $item->asignacion->nombre }}</td>
                                     <td>{{ $item->descripcion }}</td>
+                                    <td>{{ $item->nota}}</td>
                                     <td>
-                                        {{ $item->fecha_inicio}}
-                                    </td>
-                                    <td>
-                                        {{ $item->fecha_fin}} <br>
-                                    </td>
-                                    <td>{{ $item->usuario->name }}</td>
-                                    <td>{{ $item->curso->nombre }}</td>
-                                    <td>{{ $item->importe }}</td>
-                                    <td>
-                                        @if ($item->estado == true)
-                                            <span class="badge bg-success">Activo</span>
+                                        @if ($item->entregado == true)
+                                            <span class="badge badge-success">Entregado</span>
                                         @else
-                                            <span class="badge bg-danger">Inactivo</span>
+                                            <span class="badge badge-danger">No entregado</span>
                                         @endif
                                     </td>
-
                                     <td>
-                                        <a href="{{ url('/asignaciones/ver/' . $item->id) }}" class="btn btn-dark btn-sm">
+                                        <a href="{{ url('/tareas/ver/' . $item->id) }}" class="btn btn-dark btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ url('/asignaciones/actualizar/' . $item->id) }}" class="btn btn-warning btn-sm">
+                                        <a href="{{ url('/tareas/actualizar/' . $item->id) }}" class="btn btn-warning btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         @if ($item->estado == true)
-                                            <a href="{{ url('/asignaciones/estado/' . $item->id) }}" class="btn btn-danger btn-sm">
+                                            <a href="{{ url('/tareas/estado/' . $item->id) }}" class="btn btn-danger btn-sm">
                                                 <i class="fas fa-ban"></i>
                                             </a>
                                         @else
-                                            <a href="{{ url('/asignaciones/estado/' . $item->id) }}" class="btn btn-primary btn-sm">
+                                            <a href="{{ url('/tareas/estado/' . $item->id) }}" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-check"></i>
                                             </a>
-                                            <a href="{{ url('/asignaciones/eliminar/' . $item->id) }}" class="btn btn-danger btn-sm">
+                                            <a href="{{ url('/tareas/eliminar/' . $item->id) }}" class="btn btn-danger btn-sm">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         @endif
@@ -93,7 +80,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    {{ $asignaciones->links("pagination::bootstrap-5") }}
+                    {{ $tareas->links("pagination::bootstrap-5") }}
                 </div>
             </div>
         </div>

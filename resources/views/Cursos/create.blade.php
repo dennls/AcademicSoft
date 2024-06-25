@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <form action="{{ url('/cursos/registrar') }}" method="post">
+                        <form action="{{ url('/cursos/registrar') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group mb-5">
                                 <label for="nombre">Nombre curso</label>

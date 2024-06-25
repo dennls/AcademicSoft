@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('tareas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('asignacion_id')->constrained('asignaciones');
+            $table->text('descripcion')->nullable();
+            $table->decimal('nota',11,2)->default(0);
+            $table->boolean('entrega')->default(false);
             $table->timestamps();
         });
     }
