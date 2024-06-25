@@ -11,16 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cursos', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre');
-            $table->string('imagen');
-            $table->string('descripcion')->nullable();
-            $table->decimal('costo', 11, 2);
+        Schema::table('asignaciones', function (Blueprint $table) {
             $table->boolean('estado')->default(true);
-            $table->timestamps();
         });
-        //nombre, descripción, imagen, costo
     }
 
     /**
@@ -28,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cursos');
+        Schema::table('asignaciones', function (Blueprint $table) {
+            $table->dropColumn('estado');
+        });
     }
 };

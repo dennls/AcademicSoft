@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
-use Twilio\Rest\Client;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -52,7 +51,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'telefono' => ['required', 'string', 'digits_between:8,15', 'unique:users'],
+            'tipo' => ['required'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -65,41 +64,11 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $paraOtp = rand(100000, 999999);
-
-        $paraTelefono = $data['pais'] . $data['telefono'];
-        // if(str_contains($data['telefono'], '+')){
-        //     $paraTelefono = $data['telefono'];
-        // } else {
-        //     $paraTelefono = '+' . $data['telefono'];
-        // }
-
-        $usuario = User::create([
+        return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'telefono' => $paraTelefono,
-            'tipo' => 'Negocio',
-            'otp' => $paraOtp,
-            'verificado' => false,
+            'tipo' => $data['tipo'],
             'password' => Hash::make($data['password']),
         ]);
-
-        // enviamos el SMS con el OTP
-        $sid = env('TWILIO_SID');
-        $token = env('TWILIO_TOKEN');
-        $from = env('TWILIO_FROM');
-
-        try {
-            $client = new Client($sid, $token);
-
-            $client->messages->create($usuario->telefono, [
-                'from' => $from,
-                'body' => "Tu codigo OTP es: " . $paraOtp . ". No lo compartas con nadie."
-            ]);
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
-
-        return $usuario;
     }
 }

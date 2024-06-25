@@ -21,10 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'telefono',
-        'otp',
         'tipo',
-        'verificado'
+        'avatar'
     ];
 
     /**
@@ -46,4 +44,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+
+    // obtener la imagen
+    public function getAvatarUrl()
+    {
+        if($this->avatar && $this->avatar != 'avatar.png' && $this->avatar != null)
+        {
+            // verificar si la imagen inicia con http
+            if(strpos($this->avatar, 'http') === 0)
+            {
+                return $this->avatar;
+            }
+
+            return asset('avatar/'.$this->avatar);
+        } else {
+            return 'https://ui-avatars.com/api/?background=CCCCCC&color=fff&name='.urlencode($this->name);
+        }
+    }
 }

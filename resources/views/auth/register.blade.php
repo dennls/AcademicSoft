@@ -31,8 +31,8 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                     <select name="tipo" id="tipo" class="form-control">
-                                        <option value="estudiante">Estudiante</option>
-                                        <option value="administrador">Administrador</option>
+                                        <option value="Estudiante">Estudiante</option>
+                                        <option value="Administrador">Administrador</option>
                                     </select>
                                 </div>
 

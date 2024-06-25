@@ -37,32 +37,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('auth')->only('logout');
     }
-
-    // SOBREESCRIBIR LA FUNCION LOGIN
-    public function login(Request $request){
-        $this->validate($request, [
-            'email' => 'required',
-            'password' => 'required'
-        ]);
-
-        if (\Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-            return redirect('/home');
-        } else if(\Auth::attempt(['telefono' => $request->email, 'password' => $request->password])) {
-            return redirect('/home');
-        }
-
-
-        $validator = \Validator::make($request->all(), [
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-
-        $validator->errors()->add('email', trans('auth.failed'));
-
-        return back()->withErrors($validator->errors())
-            ->withInput();
-
-    }
-
 }
